@@ -65,7 +65,7 @@ export default function Header() {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <Typography className={classes.title} variant="h6" noWrap>
+          <Typography className={classes.title} variant="h6" component="h1" noWrap>
             React Movies
           </Typography>
           <div className={classes.search}>
