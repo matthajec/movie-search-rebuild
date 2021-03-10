@@ -1,23 +1,18 @@
 import { Grid } from '@material-ui/core'
 import React from 'react'
 import MovieCard from './MovieCard'
+import { IAPIData } from '../../interfaces'
 
-type MovieCardGroupProps = {
-  movies: {
-    imgSrc: string,
-    title: string,
-    imgAltText: string
-  }[]
-}
+const MovieCardGroup: React.FC<IAPIData> = ({ results }) => {
+  let components;
 
-
-const MovieCardGroup: React.FC<MovieCardGroupProps> = ({ movies }) => {
-
-  const components = movies.map((movieData, index) => (
-    <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
-      <MovieCard {...movieData} />
-    </Grid>
-  ))
+  if (results !== undefined) {
+    components = results.map((movieData, index) => (
+      <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+        <MovieCard {...movieData} />
+      </Grid>
+    ))
+  }
 
   return (
     <Grid container spacing={3}>

@@ -1,19 +1,15 @@
 import { Card, CardMedia, CardContent, Typography } from '@material-ui/core'
+import { IAPIMovieResult } from '../../interfaces'
 
-type MovieCardProps = {
-  imgSrc: string,
-  title: string,
-  imgAltText: string
-}
 
-const MovieCard: React.FC<MovieCardProps> = ({ imgSrc, title, imgAltText }) => {
+const MovieCard: React.FC<IAPIMovieResult> = ({ title, backdrop_path }) => {
   return (
     <Card>
       <CardMedia
         component="img"
-        alt={imgAltText}
+        alt={title}
         height="200"
-        image={imgSrc}
+        image={`https://image.tmdb.org/t/p/w500${backdrop_path}`}
         title={title}
       />
       <CardContent>
