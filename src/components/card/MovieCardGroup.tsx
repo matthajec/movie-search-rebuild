@@ -10,9 +10,11 @@ type MovieCardGroupProps = {
   }[]
 }
 
+
 const MovieCardGroup: React.FC<MovieCardGroupProps> = ({ movies }) => {
+
   const components = movies.map((movieData, index) => (
-    <Grid item xs={3} key={index}>
+    <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
       <MovieCard {...movieData} />
     </Grid>
   ))
