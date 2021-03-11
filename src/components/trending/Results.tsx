@@ -3,13 +3,15 @@ import MovieCardGroup from '../card/MovieCardGroup'
 import React, { useEffect, useState } from 'react'
 import http from '../../util/http'
 import { IAPIData } from '../../interfaces'
+import LoadingSpinner from '../loading/Spinner'
 
 interface IResultsProps {
   url: string,
-  setUrl: Function
+  setUrl: Function,
+  query: string
 }
 
-const Results: React.FC<IResultsProps> = ({ url, setUrl }) => {
+const Results: React.FC<IResultsProps> = ({ url, setUrl, query }) => {
   const [data, setData] = useState<IAPIData>()
   const [loadingState, setLoadingState] = useState<string>('loading')
 
@@ -51,8 +53,10 @@ const Results: React.FC<IResultsProps> = ({ url, setUrl }) => {
     }
   }
 
+  const headingMessage: string = query ? `Results for: ${query}` : 'Trending this week'
+
   if (loadingState === 'loading') {
-    return <h1>Loading...</h1>
+    return <LoadingSpinner />
   } else if (loadingState === 'loaded') {
     return (
       <React.Fragment>
@@ -61,7 +65,7 @@ const Results: React.FC<IResultsProps> = ({ url, setUrl }) => {
           totalPages={data?.total_pages}
           increment={incrementPage}
           decrement={decrementPage}
-        >Trending this week</Heading>
+        >{headingMessage}</Heading>
         <MovieCardGroup {...data} />
       </React.Fragment>
     )

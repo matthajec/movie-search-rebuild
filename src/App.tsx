@@ -13,8 +13,10 @@ const useStyles = makeStyles({
 function App() {
   const classes = useStyles()
   const [searchValue, setSearchValue] = useState<string>('')
+  const [query, setQuery] = useState<string>('')
   const [url, setUrl] = useState<string>('https://tmdb-proxy-api.herokuapp.com/trending?page=1')
   const search = () => {
+    setQuery(searchValue)
     setUrl('https://tmdb-proxy-api.herokuapp.com/search?query=' + encodeURI(searchValue) + '&page=1') // encode this
   }
 
@@ -32,6 +34,7 @@ function App() {
           <Results
             url={url}
             setUrl={setUrl}
+            query={query}
           />
         </Grid>
         <Grid item xs={1} md={2} />

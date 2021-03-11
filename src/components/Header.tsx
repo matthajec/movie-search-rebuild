@@ -69,7 +69,7 @@ const Header: React.FC<IHeaderProps> = ({ setSearchValue, searchValue, search })
       <Toolbar>
         <Typography className={classes.title} variant="h6" component="h1" noWrap>
           React Movies
-          </Typography>
+        </Typography>
         <div className={classes.search}>
           <div className={classes.searchIcon}>
             <SearchIcon />
