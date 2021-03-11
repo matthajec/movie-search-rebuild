@@ -55,8 +55,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Header() {
-  const classes = useStyles();
+interface IHeaderProps {
+  setSearchValue: Function,
+  searchValue: string,
+  search: Function
+}
+
+const Header: React.FC<IHeaderProps> = ({ setSearchValue, searchValue, search }) => {
+  const classes = useStyles()
 
   return (
     <AppBar position="static">
@@ -68,16 +74,25 @@ export default function Header() {
           <div className={classes.searchIcon}>
             <SearchIcon />
           </div>
-          <InputBase
-            placeholder="Search…"
-            classes={{
-              root: classes.inputRoot,
-              input: classes.inputInput,
-            }}
-            inputProps={{ 'aria-label': 'search' }}
-          />
+          <form onSubmit={(e) => {
+            e.preventDefault() // prevent form submit default action
+            search()
+          }}>
+            <InputBase
+              placeholder="Search…"
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+              inputProps={{ 'aria-label': 'search' }}
+              value={searchValue}
+              onChange={({ target }) => setSearchValue(target.value)}
+            />
+          </form>
         </div>
       </Toolbar>
     </AppBar>
   );
 }
+
+export default Header

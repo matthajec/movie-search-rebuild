@@ -21,4 +21,4 @@ const MovieCardGroup: React.FC<IAPIData> = ({ results }) => {
   )
 }
 
-export default MovieCardGroup
+export default React.memo(MovieCardGroup) // memoize this because otherwise the app will be laggy

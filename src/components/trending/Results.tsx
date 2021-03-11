@@ -4,25 +4,32 @@ import React, { useEffect, useState } from 'react'
 import http from '../../util/http'
 import { IAPIData } from '../../interfaces'
 
-function Results() {
+interface IResultsProps {
+  url: string,
+  setUrl: Function
+}
+
+const Results: React.FC<IResultsProps> = ({ url, setUrl }) => {
   const [data, setData] = useState<IAPIData>()
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [url, setUrl] = useState<string>('https://tmdb-proxy-api.herokuapp.com/trending&page=1')
+  const [loadingState, setLoadingState] = useState<string>('loading')
 
   useEffect(() => {
-    console.log(url)
-    setIsLoading(true)
+    setLoadingState('loading')
     http<IAPIData>(url)
       .then(data => {
         setData(data)
-        setIsLoading(false)
+        setLoadingState('loaded')
+      })
+      .catch(err => {
+        console.log(err)
+        setLoadingState('failed')
       })
   }, [url])
 
   const incrementPage = () => {
     if (data?.page && data?.total_pages) {
       if (data.page < data.total_pages)
-        setUrl(oldUrl => {
+        setUrl((oldUrl: string) => {
           let newUrl: string = oldUrl.split('page=')[0] // get the root of the old url without the page info
           let newPage: number = parseInt(oldUrl.split('page=')[1]) + 1 // get the page number and add one
           newUrl = newUrl + 'page=' + newPage // combine the url root with the page number
@@ -35,7 +42,7 @@ function Results() {
   const decrementPage = () => {
     if (data?.page && data?.total_pages) {
       if (data.page > 1)
-        setUrl(oldUrl => {
+        setUrl((oldUrl: string) => {
           let newUrl: string = oldUrl.split('page=')[0] // get the root of the old url without the page info
           let newPage: number = parseInt(oldUrl.split('page=')[1]) - 1 // get the page number and subtract one
           newUrl = newUrl + 'page=' + newPage // combine the url root with the page number
@@ -44,9 +51,9 @@ function Results() {
     }
   }
 
-  if (isLoading) {
+  if (loadingState === 'loading') {
     return <h1>Loading...</h1>
-  } else {
+  } else if (loadingState === 'loaded') {
     return (
       <React.Fragment>
         <Heading
@@ -58,6 +65,8 @@ function Results() {
         <MovieCardGroup {...data} />
       </React.Fragment>
     )
+  } else {
+    return <h1>An error occured, please reload.</h1>
   }
 }
 
