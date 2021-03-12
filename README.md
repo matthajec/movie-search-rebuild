@@ -18,7 +18,7 @@ This is an app to find and browse movies. It uses [TMDb's](https://www.themovied
     return body
   }
   ```
-  This lets the developer to use types as normal even though the results aren't known until run-time.
+  This lets you use types as normal despite the data not existing in the app until runtime.
 
 * Optimizing the search input box. The search input boxes value is stored in state in the ```App``` component where the children are the ```Header``` component and the ```Results``` component. This would cause lag whenever the value of the search box was changed because it also rerended the results. To fix this, I changed the export of the component that held the results from ```export default MovieCardGroup``` to ```export default React.memo(MovieCardGroup)```, memoizing the results so that they only rerender when there are new results.
 
