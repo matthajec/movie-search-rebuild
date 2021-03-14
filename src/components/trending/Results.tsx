@@ -56,7 +56,7 @@ const Results: React.FC<IResultsProps> = ({ url, setUrl, query }) => {
   const headingMessage: string = query ? `Results for: ${query}` : 'Trending this week'
 
   if (loadingState === 'loading') {
-    return <LoadingSpinner />
+    return <LoadingSpinner initial={data ? false : true} />
   } else if (loadingState === 'loaded') {
     return (
       <React.Fragment>

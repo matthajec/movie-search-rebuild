@@ -1,15 +1,25 @@
-import { Card, CardMedia, CardContent, Typography, makeStyles } from '@material-ui/core'
+import { Card, CardMedia, CardContent, Typography, Button, makeStyles } from '@material-ui/core'
 import Rating from '@material-ui/lab/Rating'
 import { IAPIMovieResult } from '../../interfaces'
 import Lazy from 'react-lazyload'
+import ClampLines from 'react-clamp-lines'
 
 const useStyles = makeStyles({
   root: {
-    height: '325px'
+    height: '402px'
   },
   unratedText: {
     lineHeight: '24px',
     fontSize: '18px',
+  },
+  button: {
+    marginTop: '10px'
+  },
+  cardContent: {
+    height: '207px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between'
   }
 })
 
@@ -30,18 +40,26 @@ const MovieCard: React.FC<IAPIMovieResult> = ({ title, backdrop_path, overview, 
           image={imageUrl}
           title={title}
         />
-        <CardContent>
-          <Typography component="h3" variant="h6" noWrap>
-            {title}
-          </Typography>
-          {
-            isRated ?
-              <Rating value={vote_average / 2} precision={0.1} readOnly /> :
-              <Typography className={classes.unratedText}>Unrated</Typography>
-          }
-          <Typography noWrap>
-            {description}
-          </Typography>
+        <CardContent className={classes.cardContent}>
+          <div>
+            <Typography component="h3" variant="h6" noWrap>
+              {title}
+            </Typography>
+            {
+              isRated ?
+                <Rating value={vote_average / 2} precision={0.1} readOnly /> :
+                <Typography className={classes.unratedText}>Unrated</Typography>
+            }
+            <ClampLines
+              text={description}
+              lines={3}
+              id={backdrop_path}
+              buttons={false}
+            />
+          </div>
+          <Button className={classes.button} color="primary" variant="outlined" >
+            More...
+          </Button>
         </CardContent>
 
       </Card>
