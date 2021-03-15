@@ -1,5 +1,5 @@
 import Header from './components/Header'
-import Results from './components/trending/Results'
+import Results from './components/results/Results'
 import { Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import React, { useState } from 'react'
@@ -12,6 +12,7 @@ const useStyles = makeStyles({
 
 function App() {
   const classes = useStyles()
+
   const [searchValue, setSearchValue] = useState<string>('')
   const [query, setQuery] = useState<string>('')
   const [url, setUrl] = useState<string>('https://tmdb-proxy-api.herokuapp.com/trending?page=1')
@@ -21,12 +22,18 @@ function App() {
     setUrl('https://tmdb-proxy-api.herokuapp.com/search?query=' + encodeURI(searchValue) + '&page=1') // encode this
   }
 
+  const reset = () => {
+    setQuery('')
+    setUrl('https://tmdb-proxy-api.herokuapp.com/trending?page=1')
+  }
+
   return (
     <React.Fragment>
       <Header
         searchValue={searchValue}
         setSearchValue={setSearchValue}
         search={search}
+        reset={reset}
       />
 
       <Grid className={classes.content} container>

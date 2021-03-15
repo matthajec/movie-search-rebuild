@@ -25,7 +25,7 @@ const Spinner: React.FC<{ initial: boolean }> = ({ initial }) => {
       <CircularProgress size={70} />
       {initial &&
         <Typography className={classes.text}>
-          Initial load times may take a while the server starts up
+          Initial load times may take a while as the server starts up
         </Typography>
       }
     </Box>

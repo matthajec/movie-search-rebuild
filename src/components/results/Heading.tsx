@@ -6,7 +6,8 @@ type HeadingProps = {
   page?: number,
   totalPages?: number,
   increment: Function,
-  decrement: Function
+  decrement: Function,
+  openModal: any
 }
 
 const useStyles = makeStyles({
@@ -19,6 +20,9 @@ const useStyles = makeStyles({
     fontWeight: 'bold',
     fontSize: '2.1rem',
   },
+  filtersBtn: {
+    marginLeft: '15px'
+  },
   pageContainer: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -29,7 +33,7 @@ const useStyles = makeStyles({
   }
 })
 
-const Title: React.FC<HeadingProps> = ({ children, page, totalPages, increment, decrement }) => {
+const Title: React.FC<HeadingProps> = ({ children, page, totalPages, increment, decrement, openModal }) => {
   const classes = useStyles()
 
   return (
@@ -45,6 +49,7 @@ const Title: React.FC<HeadingProps> = ({ children, page, totalPages, increment, 
           <Button onClick={() => decrement()}>Back</Button>
           <Button onClick={() => increment()}>Next</Button>
         </ButtonGroup>
+        <Button className={classes.filtersBtn} onClick={openModal} color="primary" variant="outlined">Filters</Button>
       </Box>
     </Box>
   )

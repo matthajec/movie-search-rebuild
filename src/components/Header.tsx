@@ -3,16 +3,14 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
+import Button from '@material-ui/core/Button'
 import { fade, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    padding: 0
-  },
-  title: {
-    flexGrow: 1,
+  button: {
+    marginLeft: '50px',
+    marginRight: 'auto'
   },
   search: {
     position: 'relative',
@@ -58,18 +56,23 @@ const useStyles = makeStyles((theme) => ({
 interface IHeaderProps {
   setSearchValue: Function,
   searchValue: string,
-  search: Function
+  search: Function,
+  reset: Function
 }
 
-const Header: React.FC<IHeaderProps> = ({ setSearchValue, searchValue, search }) => {
+const Header: React.FC<IHeaderProps> = ({ setSearchValue, searchValue, search, reset }) => {
   const classes = useStyles()
 
   return (
     <AppBar position="static">
       <Toolbar>
-        <Typography className={classes.title} variant="h6" component="h1" noWrap>
+        <Typography variant="h6" component="h1" noWrap>
           React Movies
         </Typography>
+
+        <Button onClick={() => reset()} className={classes.button} color="inherit">trending</Button>
+
+
         <div className={classes.search}>
           <div className={classes.searchIcon}>
             <SearchIcon />
