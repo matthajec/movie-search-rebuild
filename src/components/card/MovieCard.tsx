@@ -26,11 +26,12 @@ const useStyles = makeStyles({
 })
 
 
-const MovieCard: React.FC<IAPIMovieResult> = ({ title, backdrop_path, overview, vote_average, vote_count, release_date }) => {
+const MovieCard: React.FC<IAPIMovieResult> = ({ title, backdrop_path, overview, vote_average, vote_count, release_date, poster_path }) => {
   const classes = useStyles()
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false)
   const isRated: boolean = vote_count > 0
   const imageUrl: string = backdrop_path ? `https://image.tmdb.org/t/p/w500${backdrop_path}` : 'https://dummyimage.com/500x500.png?text=No%20Picture%20Found'
+  const posterUrl: string | undefined = poster_path ? `https://image.tmdb.org/t/p/w500${poster_path}` : undefined
   const description: string = overview ? overview : 'No overview found'
 
   const handleOpen = () => {
@@ -77,6 +78,7 @@ const MovieCard: React.FC<IAPIMovieResult> = ({ title, backdrop_path, overview, 
             isOpen={isDialogOpen}
             handleClose={handleClose}
             imageUrl={imageUrl}
+            posterUrl={posterUrl}
             isRated={isRated}
             vote_average={vote_average}
             release_date={release_date}

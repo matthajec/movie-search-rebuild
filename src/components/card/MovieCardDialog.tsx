@@ -17,6 +17,7 @@ type MovieCardDialogProps = {
   title: string,
   overview: string,
   imageUrl: string,
+  posterUrl: string | undefined,
   vote_average: number,
   isRated: boolean,
   release_date: string
@@ -46,7 +47,7 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" timeout={4000} ref={ref} {...props} />;
 });
 
-const MovieCardDialog: React.FC<MovieCardDialogProps> = ({ isOpen, handleClose, title, overview, imageUrl, isRated, vote_average, release_date }) => {
+const MovieCardDialog: React.FC<MovieCardDialogProps> = ({ isOpen, handleClose, title, overview, imageUrl, posterUrl, isRated, vote_average, release_date }) => {
   const classes = useStyles()
 
   return (
@@ -60,11 +61,12 @@ const MovieCardDialog: React.FC<MovieCardDialogProps> = ({ isOpen, handleClose, 
       </AppBar>
 
       <Grid container>
-        <Grid item xs={2} md={3} />
-        <Grid item xs={8} md={6}>
+        <Grid item xs={1} md={3} />
+        <Grid item xs={10} md={6}>
           <a target="_blank" rel="noreferrer" href={imageUrl}>
             <img className={classes.img} src={imageUrl} alt={title} />
           </a>
+          {posterUrl && <a target="_blank" rel="noreferrer" href={posterUrl}>Click to see movie poster</a>}
           <Typography variant="h4">
             {title}
           </Typography>
@@ -80,7 +82,7 @@ const MovieCardDialog: React.FC<MovieCardDialogProps> = ({ isOpen, handleClose, 
             {overview}
           </Typography>
         </Grid>
-        <Grid item xs={2} md={3} />
+        <Grid item xs={1} md={3} />
       </Grid>
     </Dialog>
   )

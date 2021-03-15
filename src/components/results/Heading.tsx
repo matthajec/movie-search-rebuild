@@ -9,15 +9,22 @@ type HeadingProps = {
   decrement: Function,
 }
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    justifyContent: 'space-between',
-    marginBottom: '15px'
+    flexDirection: 'column',
+    marginBottom: '15px',
+
+    [theme.breakpoints.up('md')]: {
+      flexDirection: 'row',
+      justifyContent: 'space-between'
+    }
   },
   heading: {
     fontWeight: 'bold',
-    fontSize: '2.1rem',
+    fontSize: '1.5rem',
+    marginBottom: '10px',
+    textAlign: 'center'
   },
   pageContainer: {
     display: 'flex',
@@ -27,7 +34,7 @@ const useStyles = makeStyles({
   pageText: {
     marginRight: '15px'
   }
-})
+}))
 
 const Title: React.FC<HeadingProps> = ({ children, page, totalPages, increment, decrement }) => {
   const classes = useStyles()

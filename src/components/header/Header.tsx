@@ -8,9 +8,25 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles((theme) => ({
+  toolbar: {
+    flexDirection: 'column',
+    paddingTop: '10px',
+    paddingBottom: '10px',
+
+    [theme.breakpoints.up('md')]: {
+      flexDirection: 'row',
+      paddingTop: '0px',
+      paddingBottom: '0px',
+    }
+  },
   button: {
-    marginLeft: '50px',
-    marginRight: 'auto'
+    width: '100%',
+    margin: '5px 0',
+    [theme.breakpoints.up('md')]: {
+      width: 'auto',
+      marginLeft: '50px',
+      marginRight: 'auto',
+    }
   },
   search: {
     position: 'relative',
@@ -65,7 +81,7 @@ const Header: React.FC<HeaderProps> = ({ setSearchValue, searchValue, search, re
 
   return (
     <AppBar position="static">
-      <Toolbar>
+      <Toolbar className={classes.toolbar}>
         <Typography variant="h6" component="h1" noWrap>
           React Movies
         </Typography>

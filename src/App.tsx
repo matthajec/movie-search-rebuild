@@ -1,4 +1,4 @@
-import Header from './components/Header'
+import Header from './components/header/Header'
 import Results from './components/results/Results'
 import { Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
