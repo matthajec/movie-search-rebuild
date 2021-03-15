@@ -1,21 +1,19 @@
 import Heading from './Heading'
-import FiltersModal from './FiltersModal'
 import MovieCardGroup from '../card/MovieCardGroup'
 import React, { useEffect, useState } from 'react'
 import http from '../../util/http'
 import { IAPIData } from '../../interfaces'
 import LoadingSpinner from '../loading/Spinner'
 
-interface IResultsProps {
+type ResultsProps = {
   url: string,
   setUrl: Function,
   query: string
 }
 
-const Results: React.FC<IResultsProps> = ({ url, setUrl, query }) => {
+const Results: React.FC<ResultsProps> = ({ url, setUrl, query }) => {
   const [data, setData] = useState<IAPIData>()
   const [loadingState, setLoadingState] = useState<string>('loading')
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 
   useEffect(() => {
     setLoadingState('loading')
@@ -55,14 +53,6 @@ const Results: React.FC<IResultsProps> = ({ url, setUrl, query }) => {
     }
   }
 
-  const openModal = () => {
-    setIsModalOpen(true)
-  }
-
-  const closeModal = () => {
-    setIsModalOpen(false)
-  }
-
   const headingMessage: string = query ? `Results for: ${query}` : 'Trending this week'
 
   if (loadingState === 'loading') {
@@ -75,13 +65,8 @@ const Results: React.FC<IResultsProps> = ({ url, setUrl, query }) => {
           totalPages={data?.total_pages}
           increment={incrementPage}
           decrement={decrementPage}
-          openModal={openModal}
         >{headingMessage}</Heading>
         <MovieCardGroup {...data} />
-        <FiltersModal
-          isOpen={isModalOpen}
-          close={closeModal}
-        />
       </React.Fragment>
     )
   } else {

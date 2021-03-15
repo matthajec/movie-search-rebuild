@@ -53,14 +53,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-interface IHeaderProps {
+type HeaderProps = {
   setSearchValue: Function,
   searchValue: string,
   search: Function,
   reset: Function
 }
 
-const Header: React.FC<IHeaderProps> = ({ setSearchValue, searchValue, search, reset }) => {
+const Header: React.FC<HeaderProps> = ({ setSearchValue, searchValue, search, reset }) => {
   const classes = useStyles()
 
   return (
