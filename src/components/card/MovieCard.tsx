@@ -1,8 +1,10 @@
+import { useState } from 'react'
 import { Card, CardMedia, CardContent, Typography, Button, makeStyles } from '@material-ui/core'
 import Rating from '@material-ui/lab/Rating'
 import { IAPIMovieResult } from '../../interfaces'
 import Lazy from 'react-lazyload'
 import ClampLines from 'react-clamp-lines'
+import MovieCardDialog from './MovieCardDialog'
 
 const useStyles = makeStyles({
   root: {
@@ -26,9 +28,18 @@ const useStyles = makeStyles({
 
 const MovieCard: React.FC<IAPIMovieResult> = ({ title, backdrop_path, overview, vote_average, vote_count }) => {
   const classes = useStyles()
+  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false)
   const isRated: boolean = vote_count > 0
   const imageUrl: string = backdrop_path ? `https://image.tmdb.org/t/p/w500${backdrop_path}` : 'https://dummyimage.com/500x500.png?text=No%20Picture%20Found'
   const description: string = overview ? overview : 'No overview found'
+
+  const handleOpen = () => {
+    setIsDialogOpen(true)
+  }
+
+  const handleClose = () => {
+    setIsDialogOpen(false)
+  }
 
   return (
     <Lazy>
@@ -57,11 +68,17 @@ const MovieCard: React.FC<IAPIMovieResult> = ({ title, backdrop_path, overview, 
               buttons={false}
             />
           </div>
-          <Button className={classes.button} color="primary" variant="outlined" >
-            More...
+          <Button onClick={handleOpen} className={classes.button} color="primary" variant="outlined" >
+            More Info...
           </Button>
+          <MovieCardDialog
+            title={title}
+            overview={overview}
+            isOpen={isDialogOpen}
+            handleClose={handleClose}
+            imageUrl={imageUrl}
+          />
         </CardContent>
-
       </Card>
     </Lazy>
   )
