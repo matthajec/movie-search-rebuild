@@ -2,7 +2,7 @@ export interface IAPIMovieResult {
   video: boolean,
   vote_average: number,
   overview: string,
-  release_data: string,
+  release_date: string,
   adult: boolean,
   backdrop_path: string,
   vote_count: number,

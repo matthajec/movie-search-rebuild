@@ -26,7 +26,7 @@ const useStyles = makeStyles({
 })
 
 
-const MovieCard: React.FC<IAPIMovieResult> = ({ title, backdrop_path, overview, vote_average, vote_count }) => {
+const MovieCard: React.FC<IAPIMovieResult> = ({ title, backdrop_path, overview, vote_average, vote_count, release_date }) => {
   const classes = useStyles()
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false)
   const isRated: boolean = vote_count > 0
@@ -77,6 +77,9 @@ const MovieCard: React.FC<IAPIMovieResult> = ({ title, backdrop_path, overview, 
             isOpen={isDialogOpen}
             handleClose={handleClose}
             imageUrl={imageUrl}
+            isRated={isRated}
+            vote_average={vote_average}
+            release_date={release_date}
           />
         </CardContent>
       </Card>
