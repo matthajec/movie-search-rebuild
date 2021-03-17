@@ -9,7 +9,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import { TransitionProps } from '@material-ui/core/transitions';
 import Slide from '@material-ui/core/Slide';
 import Toolbar from '@material-ui/core/Toolbar';
-import Rating from '@material-ui/lab/Rating'
+import Rating from '@material-ui/lab/Rating';
+import Button from '@material-ui/core/Button'
 
 type MovieCardDialogProps = {
   isOpen: boolean,
@@ -54,9 +55,9 @@ const MovieCardDialog: React.FC<MovieCardDialogProps> = ({ isOpen, handleClose, 
     <Dialog fullScreen open={isOpen} onClose={handleClose} TransitionComponent={Transition}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton onClick={handleClose} color="inherit">
-            <CloseIcon />
-          </IconButton>
+          <Button variant="outlined" onClick={handleClose} color="secondary">
+            Close
+          </Button>
         </Toolbar>
       </AppBar>
 

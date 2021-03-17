@@ -13,10 +13,7 @@ const theme = createMuiTheme({
       main: red[600]
     },
     secondary: {
-      main: '#000'
-    },
-    text: {
-      primary: '#000'
+      main: '#fff'
     }
   }
 })
