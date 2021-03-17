@@ -7,6 +7,11 @@ This is an app to find and browse movies. It uses [TMDb's](https://www.themovied
 * MaterialUI
 * TypeScript
 
+## What I learned
+* How to use Typescript asynchronously
+* How to create type-checked components in React
+* How to use MaterialUI responsively.
+
 ## Challenges
 * Implementing fetch with typescript. In my research I learned about generics, which I used to create an ```http``` utility function that looks like this:
   ```javascript
