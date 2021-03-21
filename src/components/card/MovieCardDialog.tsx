@@ -1,16 +1,14 @@
-import React from 'react'
+import React from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import AppBar from '@material-ui/core/AppBar';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-import Typography from '@material-ui/core/Typography'
-import Grid from '@material-ui/core/Grid'
-import { makeStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
 import { TransitionProps } from '@material-ui/core/transitions';
 import Slide from '@material-ui/core/Slide';
 import Toolbar from '@material-ui/core/Toolbar';
 import Rating from '@material-ui/lab/Rating';
-import Button from '@material-ui/core/Button'
+import Button from '@material-ui/core/Button';
 
 type MovieCardDialogProps = {
   isOpen: boolean,
@@ -21,8 +19,8 @@ type MovieCardDialogProps = {
   posterUrl: string | undefined,
   vote_average: number,
   isRated: boolean,
-  release_date: string
-}
+  release_date: string;
+};
 
 const useStyles = makeStyles({
   heading: {
@@ -39,17 +37,17 @@ const useStyles = makeStyles({
     lineHeight: '24px',
     fontSize: '18px',
   },
-})
+});
 
 const Transition = React.forwardRef(function Transition(
-  props: TransitionProps & { children?: React.ReactElement },
+  props: TransitionProps & { children?: React.ReactElement; },
   ref: React.Ref<unknown>,
 ) {
   return <Slide direction="up" timeout={4000} ref={ref} {...props} />;
 });
 
 const MovieCardDialog: React.FC<MovieCardDialogProps> = ({ isOpen, handleClose, title, overview, imageUrl, posterUrl, isRated, vote_average, release_date }) => {
-  const classes = useStyles()
+  const classes = useStyles();
 
   return (
     <Dialog fullScreen open={isOpen} onClose={handleClose} TransitionComponent={Transition}>
@@ -86,7 +84,7 @@ const MovieCardDialog: React.FC<MovieCardDialogProps> = ({ isOpen, handleClose, 
         <Grid item xs={1} md={3} />
       </Grid>
     </Dialog>
-  )
-}
+  );
+};
 
-export default MovieCardDialog
+export default MovieCardDialog;

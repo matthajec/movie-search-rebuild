@@ -3,7 +3,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
-import Button from '@material-ui/core/Button'
+import Button from '@material-ui/core/Button';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     },
     marginLeft: 0,
     width: '100%',
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       marginLeft: theme.spacing(1),
       width: 'auto',
     },
@@ -73,11 +73,11 @@ type HeaderProps = {
   setSearchValue: Function,
   searchValue: string,
   search: Function,
-  reset: Function
-}
+  reset: Function;
+};
 
 const Header: React.FC<HeaderProps> = ({ setSearchValue, searchValue, search, reset }) => {
-  const classes = useStyles()
+  const classes = useStyles();
 
   return (
     <AppBar position="static">
@@ -94,8 +94,8 @@ const Header: React.FC<HeaderProps> = ({ setSearchValue, searchValue, search, re
             <SearchIcon />
           </div>
           <form onSubmit={(e) => {
-            e.preventDefault() // prevent form submit default action
-            search()
+            e.preventDefault(); // prevent form submit default action
+            search();
           }}>
             <InputBase
               placeholder="Search…"
@@ -112,6 +112,6 @@ const Header: React.FC<HeaderProps> = ({ setSearchValue, searchValue, search, re
       </Toolbar>
     </AppBar>
   );
-}
+};
 
-export default Header
+export default Header;
