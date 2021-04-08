@@ -20,7 +20,7 @@ This is an app to find and browse movies. It uses [TMDb's](https://www.themovied
   ```
   This lets you use types as normal despite the data not existing in the app until runtime.
 
-* Optimizing the search input box. The search input boxes value is stored in state in the ```App``` component where the children are the ```Header``` component and the ```Results``` component. This would cause lag whenever the value of the search box was changed because it also rerended the results. To fix this, I changed the export of the component that held the results from ```export default MovieCardGroup``` to ```export default React.memo(MovieCardGroup)```, memoizing the results so that they only rerender when there are new results.
+* Optimizing the search input box. he state for the value of the search box was stored in a component that had the results as a grandchild, so every time the value of the search box changed all the results had to rerender too, which caused lots of lag. To fix this, I used ```React.memo``` on the results so the results only rerender if it's own props or state changes.
 
 * Hiding the API key
   The movie database requires an API key for the requests I'm doing in this app. I didn't want to expose that key publicly, so I created a server and hosted it on heroku that will fetch and return these results for me. The repository for that is found here [here](https://github.com/matthajec/tmdb-proxy). One issue with this system is that heroku puts servers to sleep whenever they're not being used for a period of time, since this isn't a frequently used application, the first request will take a while.
